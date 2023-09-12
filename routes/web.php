@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main.main');
+});
+
+Route::get('/contact', function(){
+    $contacts = [
+        'name'=>'Polytech',
+        'address'=>'B.Semenovskay 38',
+        'phone'=>'8(495)432-3232'
+    ];
+    return view('main.contact', ['contacts'=>$contacts]);
 });
