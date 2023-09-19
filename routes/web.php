@@ -19,6 +19,7 @@ use App\Http\Controllers\MainController;
 // });
 
 Route::get('/', [MainController::class, 'index']);
+Route::get('galery/{img}', [MainController::class, 'show']);
 
 Route::get('contacts', function(){
     $contact = [
