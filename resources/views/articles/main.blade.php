@@ -13,11 +13,12 @@
   @foreach($articles as $article)
     <tr>
       <th scope="row">{{$article->date}}</th>
-      <td><a href="/article/show/{{$article->id}}"></a>{{$article->name}}</td>
-      <td>{{$article->shortDesc}}</td>
+      <td><a class="card-link" href="/article/{{$article->id}}">{{$article->name}}</a></td>
+      <td>{{$article->short_desc}}</td>
       <td>{{$article->desc}}</td>
     </tr>
   @endforeach
   </tbody>
 </table>
+{{$articles->links()}}
 @endsection
