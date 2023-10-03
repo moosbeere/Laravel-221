@@ -9,8 +9,7 @@
             <li>{{$error}}</li>
         </ul>
         @endforeach
-    </div>
-    
+    </div>    
     @endif
 <div class="form-group">
     <label for="name">Name</label>
