@@ -59,7 +59,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $comments = Comment::where('article_id', $article->id)->get();
+        $comments = Comment::where('article_id', $article->id)->latest()->paginate(2);
         return view('articles.show', ['article'=>$article, 'comments'=>$comments]);
     }
 
@@ -104,6 +104,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $comments = Comment::where('article_id', $article->id)->delete();
         $article->delete();
         return redirect('/article');
     }
