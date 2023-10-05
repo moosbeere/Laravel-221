@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use App\Http\Controllers\MainController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Auth
+Route::get('/registr', [AuthController::class, 'registr']);
+Route::post('/create', [AuthController::class, 'create']);
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{img}', [MainController::class, 'galery']);

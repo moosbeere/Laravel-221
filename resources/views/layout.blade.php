@@ -49,9 +49,7 @@
         </div>
       </li> -->
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+       <a href="/registr" class="btn btn-outline-success my-2 my-sm-0">Sign In</a>
   </div>
 </nav>
 </header>
