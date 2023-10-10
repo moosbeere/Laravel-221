@@ -17,14 +17,14 @@ class RoleSeeder extends Seeder
     {
         User::create([
             'name' => 'Olga', 
-            'email'=> 'moosbeere_O@mail.ru',
-            'password' => Hash::make('123456'),
+            'email'=> 'moosbeere@mail.ru',
+            'password' => Hash::make(123456),
             'role'=> 'moderator'
         ]);
         User::create([
             'name' => 'Olga', 
-            'email'=> 'reader@mail.ru',
-            'password' => Hash::make('123456'),
+            'email'=> 'reader_2@mail.ru',
+            'password' => Hash::make(123456),
             'role'=> 'reader'
         ]);
     }

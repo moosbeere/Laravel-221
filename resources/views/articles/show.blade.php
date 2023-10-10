@@ -56,10 +56,12 @@
   <div class="card-body">
     <h5 class="card-title">{{$comment->title}}</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{$comment->text}}</h6>
+    @can('comment', $comment)
     <div class="d-inline-flex gap-1">
         <a href="/comment/edit/{{$comment->id}}" class="btn btn-primary">Update comment</a>
         <a href="/comment/delete/{{$comment->id}}" class="btn btn-secondary">Delete comment</a>
     </div>
+    @endcan
   </div>
 </div>
 @endforeach
