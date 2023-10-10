@@ -48,7 +48,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
-        return back()->withError(
+        return back()->withErrors(
             [
                 'email' => 'error email',
                 'password' => 'error password',
@@ -59,6 +59,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }
