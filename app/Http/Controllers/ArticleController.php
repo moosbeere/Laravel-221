@@ -14,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $article = Article::all();
+        $article = Article::latest()->paginate(5);
         return view('article.index', ['articles'=>$article]);
     }
 
@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('article.create');
     }
 
     /**
@@ -36,7 +36,20 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'date',
+            'title' => 'required|max:20|min:3',
+            'text'=>'required|max:255'
+        ]);
+
+        $article = new Article;
+        $article->date = $request->date;
+        $article->title = request('title');
+        $article->shortDesc = $request->shortDesc;
+        $article->text = $request->text;
+        $article->user_id = 1;
+        $article->save();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -47,7 +60,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('article.show', ['article'=>$article]);
     }
 
     /**
@@ -58,7 +71,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('article.edit', ['article'=>$article]);
     }
 
     /**
@@ -70,7 +83,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'date' => 'date',
+            'title' => 'required|max:20|min:3',
+            'text'=>'required|max:255'
+        ]);
+        $article->date = $request->date;
+        $article->title = $request->title;
+        $article->shortDesc = $request->shortDesc;
+        $article->text = $request->text;
+        $article->user_id = 1;
+        $article->save();
+        return redirect()->route('article.show', ['article'=>$article]);
     }
 
     /**
@@ -81,6 +105,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('article.index');
     }
 }
