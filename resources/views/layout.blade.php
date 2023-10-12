@@ -52,7 +52,13 @@
         </div>
       </li> -->
     </ul>
-       <a href="/create" class="btn btn-outline-success my-2 my-sm-0">Sign In</a>
+    @guest
+       <a href="/create" class="btn btn-outline-success my-2 my-sm-0 mr-2">Registr</a>
+       <a href="/login" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+    @endguest
+    @auth
+       <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
+    @endauth
   </div>
 </nav>
 </header>
