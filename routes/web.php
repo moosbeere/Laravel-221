@@ -16,8 +16,8 @@ use App\Http\Controllers\AuthController;
 */
 
 //Auth
-Route::get('/registr', [AuthController::class, 'registr']);
-Route::post('/create', [AuthController::class, 'create']);
+Route::post('/registr', [AuthController::class, 'registr']);
+Route::get('/create', [AuthController::class, 'create']);
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{img}', [MainController::class, 'galery']);

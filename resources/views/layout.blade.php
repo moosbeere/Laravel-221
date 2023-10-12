@@ -49,7 +49,7 @@
         </div>
       </li> -->
     </ul>
-       <a href="/registr" class="btn btn-outline-success my-2 my-sm-0">Sign In</a>
+       <a href="/create" class="btn btn-outline-success my-2 my-sm-0">Sign In</a>
   </div>
 </nav>
 </header>
