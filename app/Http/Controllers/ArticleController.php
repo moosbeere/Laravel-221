@@ -74,6 +74,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        Gate::authorize('update', [self::class, $article]);
         return view('articles.edit', ['article'=>$article]);
     }
 
@@ -107,6 +108,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        Gate::authorize('delete', [self::class, $article]);
         $comments = Comment::where('article_id', $article->id)->delete();
         $article->delete();
         return redirect('/article');

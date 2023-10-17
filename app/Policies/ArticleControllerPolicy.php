@@ -57,7 +57,9 @@ class ArticleControllerPolicy
      */
     public function update(User $user, Article $article)
     {
-        //
+        return $user->role === 'moderator' ?
+        Response::allow() :
+        Response::deny('Вы не модератор');
     }
 
     /**
@@ -69,7 +71,9 @@ class ArticleControllerPolicy
      */
     public function delete(User $user, Article $article)
     {
-        //
+        return $user->role === 'moderator' ?
+        Response::allow() :
+        Response::deny('Вы не модератор');
     }
 
     /**
