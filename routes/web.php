@@ -15,6 +15,14 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Comment
+Route::prefix('/comment')->group(function(){
+    Route::get('/create', [CommentController::class, 'create']);
+    Route::post('/store', [CommentController::class, 'store']);
+    Route::get('/edit/{id}', [CommentController::class, 'edit']);
+    Route::post('/update/{id}', [CommentController::class, 'update']);
+    Route::get('/delete/{id}', [CommentController::class, 'delete']);
+});
 
 //Article
 Route::resource('article', ArticleController::class)->middleware('auth:sanctum');

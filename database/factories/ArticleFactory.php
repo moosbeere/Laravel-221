@@ -18,7 +18,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->sentence(),
             'shortDesc' => $this->faker->paragraph(),
             'text' => $this->faker->text(),
-            'user_id' => $this->faker->randomDigitNotNull(),
+            'user_id' => $this->faker->numberBetween(1,2),
         ];
     }
 }
