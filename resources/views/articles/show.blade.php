@@ -33,6 +33,16 @@
     @endif
   <div class="card-header">
     <h3>Comments</h3>
+    @isset($_GET['res'])
+    @if ($_GET['res'] == 1)
+    <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+        Комментарий успешно добавлен и отправлен на модерацию.
+    </div>
+    @endif
+    @endisset
   </div>
   <div class="card-body">
       <form action="/comment/store" method="post">
@@ -60,7 +70,7 @@
     <h6 class="card-subtitle mb-2 text-body-secondary">{{$comment->text}}</h6>
     @can('comment', $comment)
     <div class="d-inline-flex gap-1">
-        <a href="/comment/edit/{{$comment->id}}" class="btn btn-primary">Update comment</a>
+        <a href="/comment/edit/{{$comment->id}}" class="btn btn-primary mr-2">Update comment</a>
         <a href="/comment/delete/{{$comment->id}}" class="btn btn-secondary">Delete comment</a>
     </div>
     @endcan

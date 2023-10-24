@@ -34,7 +34,7 @@ class ArticleMailJob implements ShouldQueue
      * @return void
      */
     public function handle()
-    {
+    {        
         Mail::to('moosbeere_O@mail.ru')->send(new ArticleMail($this->article));
     }
 }
