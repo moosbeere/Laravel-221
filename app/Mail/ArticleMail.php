@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Article;
 
 class ArticleMail extends Mailable
 {
@@ -17,9 +17,11 @@ class ArticleMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    protected $article;
+
+    public function __construct(Article $article)
     {
-        //
+        $this->article = $article;
     }
 
     /**
@@ -29,7 +31,7 @@ class ArticleMail extends Mailable
      */
     public function build()
     {
-        return $this->from('moosbeere_O@mail.ru')
-                    ->view('mail.article');
+        return $this->from(env('MAIL_USERNAME'))
+                    ->view('mail.article', ['article'=>$this->article]);
     }
 }

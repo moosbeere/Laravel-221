@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ArticleMail;
 
@@ -53,7 +54,8 @@ class ArticleController extends Controller
         $article->desc = $request->desc;
         $article->author_id = 1;
         $article->save();
-        Mail::to('moosbeere_O@mail.ru')->send(new ArticleMail);
+        // Log::alert($article);
+        Mail::to('moosbeere_O@mail.ru')->send(new ArticleMail($article));
         return redirect('/article');
 
     }
