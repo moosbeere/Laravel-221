@@ -31,6 +31,8 @@ Route::group(['prefix'=>'/comment', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/edit/{id}', [CommentController::class, 'edit']);
     Route::post('/update/{id}', [CommentController::class, 'update']);
     Route::get('/delete/{id}', [CommentController::class, 'delete']);
+    Route::get('/accept/{id}', [CommentController::class, 'accept']);
+    Route::get('/reject/{id}', [CommentController::class, 'reject']);
 });
 
 

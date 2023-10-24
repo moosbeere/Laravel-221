@@ -18,6 +18,13 @@
 <div class="card mt-2 mb-2">
   <div class="card-header text-center">
     <h3>Comments</h3>
+    @isset($_GET['res'])
+    @if($_GET['res'] == 1)
+    <div class="alert alert-success">
+      <p>Ваш комментарий успешно создан и отправлен на модерацию!</p>
+    </div>
+    @endif
+    @endisset
   </div>
   <div class="card-body">
     <div class="form">

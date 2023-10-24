@@ -21,10 +21,14 @@
         @else {{$comment->getAuthor()->name}}
        @endif
       </td>
-      <td><a href="/comment/accept" class="btn btn-secondary mb-2">Accept</a>
-      <a href="/comment/reject" class="btn btn-danger">Reject</a></td>
+      <td>
+      @if(!$comment->accept)  
+      <a href="/comment/accept/{{$comment->id}}" class="btn btn-secondary mb-2">Accept</a>
+      @endif
+      <a href="/comment/reject/{{$comment->id}}" class="btn btn-danger">Reject</a></td>
     </tr>
   @endforeach
   </tbody>
 </table>
+{{$comments->links()}}
 @endsection
