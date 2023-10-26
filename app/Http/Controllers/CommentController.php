@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Article;
 use Illuminate\Support\Facades\Gate;
+use App\Jobs\MailJob;
 
 
 class CommentController extends Controller
@@ -13,13 +15,14 @@ class CommentController extends Controller
         $request->validate([
             'text'=> 'required'
         ]);
-
+        $article = Article::findOrFail($request->article_id);
         $comment = new Comment;
         $comment->title = $request->title;
         $comment->text = $request->text;
         $comment->article_id = $request->article_id;
         $comment->user_id = auth()->id();
-        $comment->save();
+        $res = $comment->save();
+        if ($res) MailJob::dispatch($comment, $article->title);
         return redirect()->route('article.show', ['article'=>$request->article_id]);
     }
 
