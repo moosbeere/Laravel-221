@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 use App\Mail\AdminComment;
 use App\Models\Article;
@@ -28,6 +30,12 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $users = User::where('id', '!=', $comment->author_id)->get();
         $article = Article::findOrFail($comment->article_id);
+
+        $caches = DB::table('cache')->whereRaw('`key` GLOB :key',  [':key'=> 'article/*[0-9]:[0-9]'])->get();
+        foreach($caches as $cache){
+            Cache::forget($cache->key);
+        }
+
         $comment->accept = true;
         $comment->save();
         Notification::send($users, new CommentNotifi($article));
@@ -35,6 +43,12 @@ class CommentController extends Controller
     }
 
     public function reject(int $id){
+
+        $caches = DB::table('cache')->whereRaw('`key` GLOB :key',  [':key'=> 'article/*[0-9]:[0-9]'])->get();
+        foreach($caches as $cache){
+            Cache::forget($cache->key);
+        }
+
         $comment = Comment::findOrFail($id);
         $comment->accept = false;
         $comment->save();
@@ -81,6 +95,12 @@ class CommentController extends Controller
     }
 
     public function delete($id){
+
+        $caches = DB::table('cache')->whereRaw('`key` GLOB :key',  [':key'=> 'article/*[0-9]:[0-9]'])->get();
+        foreach($caches as $cache){
+            Cache::forget($cache->key);
+        }
+        
         $comment = Comment::findOrFail($id);
         Gate::authorize('comment', $comment);
         $comment->delete();
