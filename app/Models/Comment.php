@@ -16,4 +16,9 @@ class Comment extends Model
     public function article(){
         return $this->belongsTo(Article::class);
     }
+
+    public function getUserId():User
+    {
+        return User::findOrFail($this->user_id);
+    }
 }

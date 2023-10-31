@@ -11,6 +11,26 @@ use App\Jobs\MailJob;
 
 class CommentController extends Controller
 {
+
+    public function index(){
+        $comments = Comment::latest()->paginate(10);
+        $articles = Article::all();
+        return view('comment.index', ['comments'=>$comments, 'articles'=>$articles]);
+    }
+
+    public function accept(int $id){
+        $comment = Comment::findOrFail($id);
+        $comment->accept = 1;
+        $comment->save();
+        return redirect('/comment/all');
+    }
+    public function reject(int $id){
+        $comment = Comment::findOrFail($id);
+        $comment->accept = 0;
+        $comment->save();
+        return redirect('/comment/all');
+    }
+
     public function store(Request $request){
         $request->validate([
             'text'=> 'required'
@@ -23,7 +43,7 @@ class CommentController extends Controller
         $comment->user_id = auth()->id();
         $res = $comment->save();
         if ($res) MailJob::dispatch($comment, $article->title);
-        return redirect()->route('article.show', ['article'=>$request->article_id]);
+        return redirect()->route('article.show', ['article'=>$request->article_id, 'res'=>$res]);
     }
 
     public function edit($id){

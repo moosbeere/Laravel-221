@@ -20,7 +20,19 @@
     </div>
   </div>
   <h3 class="mt-3">Comments</h3>
+  @isset($_GET['res'])
+  @if ($_GET['res'] == 1)
+  <div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+    Your comment send to moderation!
+
   </div>
+  @endif
+  @endisset
+  </div>
+  
   <div class="alert-danger">
     @if ($errors->any())
       @foreach($errors->all() as $error)

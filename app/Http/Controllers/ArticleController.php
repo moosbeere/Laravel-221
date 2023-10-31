@@ -66,7 +66,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $comments = Comment::where('article_id', $article->id)->latest()->get();
+        $comments = Comment::where('article_id', $article->id)
+                            ->where('accept', 1)
+                            ->latest()->get();
         return view('article.show', ['article'=>$article, 'comments'=>$comments]);
     }
 

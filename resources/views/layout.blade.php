@@ -41,6 +41,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/article/create">Create Article</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/comment/all">Comment Moderation</a>
+      </li>
       @endcan
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">

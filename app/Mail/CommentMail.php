@@ -35,7 +35,7 @@ class CommentMail extends Mailable
     public function build()
     {
         return $this->from('moosbeere_O@mail.ru')
-                    ->view('main.comment')
+                    ->view('mail.comment')
                     ->with([
                         'text_article' => $this->text_article,
                         'comment' => $this->comment
