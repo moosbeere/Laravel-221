@@ -54,8 +54,8 @@ class CommentController extends Controller
         $users = User::where('id', '!=', auth()->id())->get();
         Log::alert($users);
         if($res) {
-            Mail::to('moosbeere_O@mail.ru')->send(new AdminComment($comment, $article->name));
-            Notification::send($users, new CommentNotifi($comment));
+            // Mail::to('moosbeere_O@mail.ru')->send(new AdminComment($comment, $article->name));
+            Notification::send($users, new CommentNotifi($article));
         }
         return redirect()->route('article.show', ['article'=>$comment->article_id, 'res'=>$res]);
     }

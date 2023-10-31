@@ -46,17 +46,18 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contacts</a>
           </li>
-          <!-- <li class="nav-item dropdown">
+          @auth
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              New comment  <span>{{auth()->user()->unreadNotifications->count()}}</span>
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">           
+            @foreach(auth()->user()->unreadNotifications as $notification)
+              <a class="dropdown-item" href="{{route('article.show', ['article'=>$notification->data['article']['id'], 'notify'=>$notification->id])}}">for Article: {{$notification->data['article']['name']}}</a>
+            @endforeach
             </div>
-          </li> -->
+          </li>
+          @endauth
         </ul>
         <div class="form-inline my-2 my-lg-0">
         @guest
