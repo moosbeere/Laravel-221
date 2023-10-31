@@ -21,8 +21,11 @@
       @endforeach
       <td>{{$comment->title}}</td>
       <td>{{$comment->text}}</td>
-      <td><a href="/comment/accept/{{$comment->id}}" class="btn btn-primary">Accept</a></td>
-      <td><a href="/comment/reject/{{$comment->id}}" class="btn btn-danger">Reject</a></td>
+      @if($comment->accept == NULL && $comment->accept == 0)
+        <td><a href="/comment/accept/{{$comment->id}}" class="btn btn-primary">Accept</a></td>
+      @else
+        <td><a href="/comment/reject/{{$comment->id}}" class="btn btn-danger">Reject</a></td>
+      @endif
     </tr>
     @endforeach
   </tbody>

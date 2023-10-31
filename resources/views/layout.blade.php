@@ -44,31 +44,29 @@
       @can('create')
       <li class="nav-item">
         <a class="nav-link" href="/article/create">Create Article<span class="sr-only">(current)</span></a>
-      </li>
-      @endcan
+      </li>      
       <li class="nav-item">
         <a class="nav-link" href="/comment">Comments <span class="sr-only">(current)</span></a>
       </li>
+      @endcan
       <li class="nav-item">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/contacts">Contact</a>
       </li>
-      <!-- <li class="nav-item dropdown">
+      @auth
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown
+          NewComment
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+         @foreach(auth()->user()->unreadNotifications as $notification) 
+            <a class="dropdown-item" href="{{route('article.show', ['article' => $notification->data['article']['id'], 'notify'=>$notification->id])}}">Article: {{$notification->data['article']['name']}}</a> 
+         @endforeach    
         </div>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
-      </li> -->
+      </li>
+      @endauth
     </ul>
     <div class="form-inline my-2 my-lg-0">
       @guest

@@ -33,6 +33,12 @@ class AuthServiceProvider extends ServiceProvider
             if($user->role === 'moderator') return true;
         });
 
+        Gate::define('admincomment', function(User $user){
+            if ($user->role === 'moderator'){
+                return Response::allow();
+            } return Response::deny('В доступе отказано!');
+        });
+
         Gate::define('comment', function(User $user, Comment $comment){
             if ($user->id === $comment->author_id){
                 return Response::allow();

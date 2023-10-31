@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use App\Jobs\ArticleMailJob;
 
 
@@ -67,6 +68,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        if (isset($_GET['notify'])){
+            auth()->user()->notifications->where('id', $_GET['notify'])->first()->markAsRead();
+        }
         $comments = Comment::where('article_id', $article->id)
                             ->where('accept', 1)
                             ->latest()->paginate(2);

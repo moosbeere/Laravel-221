@@ -7,9 +7,12 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AdminComment;
+use App\Notifications\NotifyNewComment;
 
 class CommentController extends Controller
 {
@@ -21,12 +24,14 @@ class CommentController extends Controller
     }
 
     public function accept(int $id){
+        Gate::authorize('admincomment');
         $comment = Comment::findOrFail($id);
         $comment->accept = true;
         $comment->save();
         return redirect()->route('comments');
     }
     public function reject(int $id){
+        Gate::authorize('admincomment');
         $comment = Comment::findOrFail($id);
         $comment->accept = false;
         $comment->save();
@@ -40,13 +45,18 @@ class CommentController extends Controller
             'article_id' => 'required',
         ]);
         $article = Article::findOrFail($request->article_id);
+        $users = User::where('id', '!=', auth()->id())->get();
         $comment = new Comment;
         $comment->title = $request->title;
         $comment->text = $request->text;
         $comment->author_id = Auth::id();
         $comment->article_id = $request->article_id;
         $res = $comment->save();
-        if ($res) Mail::to('moosbeere_O@mail.ru')->send(new AdminComment($article->name, $comment->text));
+        if ($res) {
+            Mail::to('moosbeere_O@mail.ru')->send(new AdminComment($article->name, $comment->text));
+            // $users->notify(new NotifyNewComment($article->name)); //вызывает ошибку, так как нельзя отправить от массива объектов
+            Notification::send($users, new NotifyNewComment($article));
+        }
         return redirect()->route('article.show', ['article'=>$request->article_id, 'res'=>$res]);
     }
 
