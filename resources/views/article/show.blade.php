@@ -71,5 +71,6 @@
      </div>
   </div>
   @endforeach
+  {{$comments->links()}}
 
 @endsection
