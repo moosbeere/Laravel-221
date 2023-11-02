@@ -68,9 +68,14 @@
 </nav>
 </header>
 <main>
+<div id="app">
+    <App />
+ </div>
+
     <div class="container">
     @yield('content')    
     </div>
 </main>
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
