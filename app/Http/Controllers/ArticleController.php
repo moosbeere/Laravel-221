@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Jobs\ArticleMailJob;
+use App\Events\EventNewComment;
+
 
 
 class ArticleController extends Controller
@@ -55,6 +57,8 @@ class ArticleController extends Controller
         $article->author_id = 1;
         $article->save();
         // Log::alert($article);
+        EventNewComment::dispatch($article);
+
         ArticleMailJob::dispatch($article);
         return redirect('/article');
 
