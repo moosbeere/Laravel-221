@@ -32,17 +32,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link @activeLink('/')" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link @activeLink('contact')" href="/contact">Contact</a>
       </li>
       @can('create')
       <li class="nav-item">
-        <a class="nav-link" href="/article/create">Create Article</a>
+        <a class="nav-link @activeLink('article/create')" href="/article/create">Create Article</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/comment/all">Comment Moderation</a>
+        <a class="nav-link @activeLink('comment/all')" href="/comment/all">Comment Moderation</a>
       </li>
       @endcan
       @auth
