@@ -16,7 +16,7 @@
       <th scope="row">{{$comment->created_at}}</th>
       @foreach($articles as $article)
       @if ($comment->article_id == $article->id)
-      <td>{{$article->name}}</td>
+      <td><a href="/article/{{$article->id}}">{{$article->name}}</a></td>
       @endif
       @endforeach
       <td>{{$comment->title}}</td>

@@ -19481,14 +19481,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      msg: null
+      article: null
     };
   },
   created: function created() {
     var _this = this;
-    window.Echo.channel('test').listen('EventNewComment', function (name) {
-      console.log(name);
-      _this.msg = name.name;
+    window.Echo.channel('test').listen('EventNewComment', function (data) {
+      // console.log(name);
+      _this.article = data.article;
       // alert('Добавлена новая статья!');
     });
   }
@@ -19513,9 +19513,12 @@ var _hoisted_1 = {
   "class": "alert alert-primary",
   role: "alert"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Добавлена новая статья ");
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Добавлен новый комментарий к статье ");
+var _hoisted_3 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.msg), 1 /* TEXT */)], 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, this.msg != null]]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/article/".concat(this.article.id, "/")
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.article.name), 9 /* TEXT, PROPS */, _hoisted_3)])], 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, this.article != null]]);
 }
 
 /***/ }),
