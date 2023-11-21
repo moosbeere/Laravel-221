@@ -44,22 +44,22 @@
     <ul class="navbar-nav mr-auto">
       @can('create')
       <li class="nav-item">
-        <a class="nav-link" href="/article/create">Create Article<span class="sr-only">(current)</span></a>
+        <a class="nav-link @activeLink('article/create')" href="/article/create">Create Article<span class="sr-only">(current)</span></a>
       </li>      
       <li class="nav-item">
-        <a class="nav-link" href="/comment">Comments <span class="sr-only">(current)</span></a>
+        <a class="nav-link @activeLink('comment')" href="/comment">Comments <span class="sr-only">(current)</span></a>
       </li>
       @endcan
       <li class="nav-item">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link @activeLink('/')" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/contacts">Contact</a>
+        <a class="nav-link @activeLink('contacts')" href="/contacts">Contact</a>
       </li>
       @auth
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          NewComment
+          NewComment {{auth()->user()->unreadNotifications->count()}}
         </a>
         <div class="dropdown-menu">
          @foreach(auth()->user()->unreadNotifications as $notification) 
